@@ -1,5 +1,5 @@
 import os
-import sys
+import traceback
 import HWD
 
 def main():
@@ -25,6 +25,7 @@ def main():
         print "exiting from button"
     except Exception, e:
         print str(e)
+        traceback.print_exc()
 
     if hwd is not None:
         hwd.cleanup()
