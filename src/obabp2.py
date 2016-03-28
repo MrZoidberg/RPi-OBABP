@@ -4,6 +4,8 @@ import HWD
 
 def main():
     hwd = None
+    print ("====> Audio player start")
+
     try:
         hwd = HWD()
         hwd.setStatusLed(18)
@@ -12,6 +14,8 @@ def main():
         hwd.setVolumeUpButton(13)
         hwd.setVolumeDownButton(15)
         hwd.setup()
+
+        print ("setup complete")
 
         hwd.flashLed(hwd.powerLed, 2, 50)
         hwd.flashLed(hwd.statusLed, 2, 50)
@@ -25,7 +29,6 @@ def main():
     if hwd is not None:
         hwd.cleanup()
     # Restart application
-    os.execl('runme.sh', '')
 
 if __name__ == '__main__':
     main()
