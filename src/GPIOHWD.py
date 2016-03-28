@@ -49,13 +49,13 @@ class GPIOHWD(object):
         self._volumeUpButton = _button
 
     def flashLed(self, led, speed, time):
-        print("flashing led " + led + " at freq " + speed +
-              " with duty " + time)
+        print("flashing led " + str(led) + " at freq " + str(speed) +
+              " with duty " + str(time))
         pwm = GPIO.PWM(led, speed)
         pwm.start(time)
 
     def stopFlash(self, led):
-        print("stop flashing led " + led)
+        print("stop flashing led " + str(led))
         pwm = self.flashes[led]
         if pwm is not None:
             pwm.stop()
