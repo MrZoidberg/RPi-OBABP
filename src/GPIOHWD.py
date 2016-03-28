@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 
 
-class HWD(object):
+class GPIOHWD(object):
 
     def __init__(self,):
         GPIO.setmode(GPIO.BOARD)

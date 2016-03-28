@@ -1,13 +1,14 @@
 import os
 import traceback
-import HWD
+from GPIOHWD import GPIOHWD
+
 
 def main():
     hwd = None
     print ("====> Audio player start")
 
     try:
-        hwd = HWD()
+        hwd = GPIOHWD()
         hwd.setStatusLed(18)
         hwd.setPowerLed(16)
         hwd.setPlayButton(11)
@@ -23,8 +24,7 @@ def main():
         raw_input("Press Enter to exit...")
     except KeyboardInterrupt:
         print "exiting from button"
-    except Exception, e:
-        print str(e)
+    except Exception:
         traceback.print_exc()
 
     if hwd is not None:
