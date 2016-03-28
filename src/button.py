@@ -18,11 +18,6 @@ def main():
     try:
         while True:
             if GPIO.input(button):
-                print('Input was HIGH')
-            else:
-                print('Input was LOW')
-
-            if GPIO.input(button) is False:
                 sleep(0.01)
                 if not pressed:
                     print("button pressed")
@@ -34,6 +29,7 @@ def main():
                 pressed = False
             sleep(0.1)
     except KeyboardInterrupt:
+        print("cleanup")
         GPIO.cleanup()
 
 if __name__ == '__main__':
