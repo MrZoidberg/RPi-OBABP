@@ -62,7 +62,7 @@ class OBABP(object):
         # GPIO.cleanup();
         GPIO.setmode(mode)
         GPIO.setup(self.led, GPIO.OUT)
-        GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def flashLED(self, speed, time):
         for x in range(0, time):
@@ -99,7 +99,7 @@ class OBABP(object):
         return res
 
     def buttonDown(self):
-        if GPIO.input(self.button) is False:
+        if GPIO.input(self.button):
             return True
         else:
             return False
