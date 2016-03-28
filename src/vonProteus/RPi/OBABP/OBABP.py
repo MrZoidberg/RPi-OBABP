@@ -93,10 +93,13 @@ class OBABP(object):
     def checkForUSBDevice(self):
         res = ""
         context = pyudev.Context()
-        for device in context.list_devices(subsystem='block', DEVTYPE='partition'):
+        try:
+            for device in context.list_devices(subsystem='block', DEVTYPE='partition'):
                 if device.get('ID_FS_LABEL') == self.driveName:
                         res = device.device_node
-        return res
+            return res
+        except DeviceNotFoundAtPathError:
+            return res
 
     def buttonDown(self):
         if GPIO.input(self.button):
