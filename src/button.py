@@ -4,13 +4,13 @@ import RPi.GPIO as GPIO
 
 def main():
     led = 16
-    button = 18
+    button = 11
     pressed = False
 
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(led, GPIO.OUT)
     GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.output(led, GPIO.LOW)
+    GPIO.output(led, GPIO.HIGH)
 
     print("init done")
 
@@ -19,11 +19,11 @@ def main():
             sleep(0.01)
             if not pressed:
                 print("button pressed")
-                GPIO.output(led, GPIO.HIGH)
+                GPIO.output(led, GPIO.LOW)
                 pressed = True
         elif pressed:
             print("button released")
-            GPIO.output(led, GPIO.LOW)
+            GPIO.output(led, GPIO.HIGH)
             pressed = False
         sleep(0.1)
 
