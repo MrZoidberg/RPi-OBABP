@@ -53,6 +53,7 @@ class GPIOHWD(object):
               " with duty " + str(time))
         pwm = GPIO.PWM(led, speed)
         pwm.start(time)
+        self.flashes[led] = pwm
 
     def stopFlash(self, led):
         print("stop flashing led " + str(led))
