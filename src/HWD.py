@@ -53,7 +53,7 @@ class HDW(object):
 
     def stopFlash(self, led):
         pwm = self.flashes[led]
-        if pwm:
+        if pwm is not None:
             pwm.stop()
             del self.flashes[led]
 

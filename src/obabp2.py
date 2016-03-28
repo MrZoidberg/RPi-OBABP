@@ -23,8 +23,8 @@ def main():
         raw_input("Press Enter to exit...")
     except KeyboardInterrupt:
         print "exiting from button"
-    except:
-        print "Unexpected error:", sys.exc_info()[0]
+    except Exception, e:
+        print str(e)
 
     if hwd is not None:
         hwd.cleanup()
