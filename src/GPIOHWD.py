@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 class GPIOHWD(object):
 
     def __init__(self,):
+        print("GPIO version: " + GPIO.VERSION)
         GPIO.setmode(GPIO.BOARD)
         self._statusLed = -1
         self._powerLed = -1

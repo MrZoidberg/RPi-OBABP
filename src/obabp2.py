@@ -18,8 +18,8 @@ def main():
 
         print ("setup complete")
 
-        hwd.flashLed(hwd.powerLed, 2, 50)
-        hwd.flashLed(hwd.statusLed, 2, 50)
+        hwd.flashLed(hwd.powerLed, 1, 1)
+        hwd.flashLed(hwd.statusLed, 1, 1)
 
         raw_input("Press Enter to exit...")
     except KeyboardInterrupt:
