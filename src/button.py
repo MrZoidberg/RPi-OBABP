@@ -12,11 +12,16 @@ def main():
     GPIO.setup(led, GPIO.OUT)
     GPIO.output(led, GPIO.HIGH)
 
-    GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     print("init done")
     try:
         while True:
+            if GPIO.input(button):
+                print('Input was HIGH')
+            else:
+                print('Input was LOW')
+
             if GPIO.input(button) is False:
                 sleep(0.01)
                 if not pressed:
