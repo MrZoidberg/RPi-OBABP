@@ -25,7 +25,7 @@ class Player(object):
             print traceback.print_exc()
             return False
 
-        print "mpd status:" + self.client.status()
+        print self.client.status()
         return True
 
     def disconnect(self):
