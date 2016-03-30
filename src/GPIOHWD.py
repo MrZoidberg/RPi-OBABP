@@ -57,10 +57,9 @@ class GPIOHWD(object):
 
     def stopFlash(self, led):
         print("stop flashing led " + str(led))
-        pwm = self.flashes[led]
+        pwm = self.flashes.pop(led, None)
         if pwm is not None:
             pwm.stop()
-            del self.flashes[led]
 
     def updateLed(self, led, turnOn):
         self.stopFlash(led)

@@ -88,8 +88,7 @@ def main():
     except Exception:
         traceback.print_exc()
 
-    if hwd is not None:
-        hwd.cleanup()
+    hwd.cleanup()
     # Restart application
 
 if __name__ == '__main__':
