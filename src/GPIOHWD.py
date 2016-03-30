@@ -62,9 +62,9 @@ class GPIOHWD(object):
             pwm.stop()
             del self.flashes[led]
 
-    def updateLED(self, led, on):
+    def updateLed(self, led, turnOn):
         self.stopFlash(led)
-        if on:
+        if turnOn is True:
             GPIO.output(led, GPIO.LOW)
         else:
             GPIO.output(led, GPIO.HIGH)
