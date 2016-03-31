@@ -67,15 +67,15 @@ def main():
 
             if pendrive != "":
                 print "new music detected"
-                hwd.flashLed(hwd.statusLed, 2, 1)
+                hwd.flashLed(hwd.statusLed, 0.5, 1)
 
                 player.disconnect()
                 loadMusic(pendrive, "/mnt/usb/", "/var/lib/mpd/music/",
                                     "/var/lib/mpd/tag_cache")
                 player.connectMPD()
                 print "new music added"
-                hwd.flashLed(hwd.statusLed, 3, 1)
-                while checkForUSBDevice() == pendrive:
+                hwd.flashLed(hwd.statusLed, 1, 0.5)
+                while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.1)
                 print "usb drive removed"
                 hwd.stopFlash(hwd.statusLed)
