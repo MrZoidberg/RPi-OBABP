@@ -3,7 +3,7 @@ import traceback
 import time
 from GPIOHWD import GPIOHWD
 from player import Player
-import pyudev
+from pyudev import pyudev, DeviceNotFoundAtPathError
 
 
 def checkForUSBDevice(driveName):
@@ -67,7 +67,7 @@ def main():
                                     "/var/lib/mpd/tag_cache")
                 player.connectMPD()
                 print "new music added"
-                hwd.flashLed(hwd.statusLed, 0.25, 50)
+                hwd.flashLed(hwd.statusLed, 1, 50)
                 while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.1)
                 print "usb drive removed"
