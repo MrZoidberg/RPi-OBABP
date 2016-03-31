@@ -3,8 +3,7 @@ import traceback
 import time
 from GPIOHWD import GPIOHWD
 from player import Player
-from pyudev import pyudev, DeviceNotFoundAtPathError
-
+import pyudev
 
 def checkForUSBDevice(driveName):
     res = ""
