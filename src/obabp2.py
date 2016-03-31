@@ -46,35 +46,28 @@ def main():
         hwd.setVolumeDownButton(15)
         hwd.setup()
 
-        hwd.flashLed(hwd.powerLed, 1, 1)
-        hwd.flashLed(hwd.statusLed, 1, 1)
-
         print ("hardware setup complete")
-
-        time.sleep(1)
 
         player = Player()
         player.setPort('6600')
         player.setHost('localhost')
         player.connectMPD()
 
-        hwd.stopFlash(hwd.powerLed)
         hwd.updateLed(hwd.powerLed, True)
-        hwd.stopFlash(hwd.statusLed)
 
         while(True):
             pendrive = checkForUSBDevice(driveName)
 
             if pendrive != "":
                 print "new music detected"
-                hwd.flashLed(hwd.statusLed, 0.5, 1)
+                hwd.flashLed(hwd.statusLed, 0.5, 50)
 
                 player.disconnect()
                 loadMusic(pendrive, "/mnt/usb/", "/var/lib/mpd/music/",
                                     "/var/lib/mpd/tag_cache")
                 player.connectMPD()
                 print "new music added"
-                hwd.flashLed(hwd.statusLed, 1, 0.5)
+                hwd.flashLed(hwd.statusLed, 1, 50)
                 while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.1)
                 print "usb drive removed"
