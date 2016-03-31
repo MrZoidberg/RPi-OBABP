@@ -5,6 +5,7 @@ from GPIOHWD import GPIOHWD
 from player import Player
 import pyudev
 
+
 def checkForUSBDevice(driveName):
     res = ""
     context = pyudev.Context()
@@ -14,7 +15,7 @@ def checkForUSBDevice(driveName):
             if device.get('ID_FS_LABEL') == driveName:
                     res = device.device_node
         return res
-    except DeviceNotFoundAtPathError:
+    except Exception:
         return res
 
 
@@ -27,7 +28,7 @@ def loadMusic(device, mountPoint, musicDir, tagCacheDir):
     os.system("rm "+tagCacheDir)
     os.system("/etc/init.d/mpd start")
     os.system("mpc clear")
-    os.system("mpc ls | mpc add")
+    os.system("mpc listall | mpc add")
     os.system("/etc/init.d/mpd restart")
 
 
@@ -57,6 +58,8 @@ def main():
         while(True):
             pendrive = checkForUSBDevice(driveName)
 
+            print player.getPlaylistinfo()
+
             if pendrive != "":
                 print "new music detected"
                 hwd.flashLed(hwd.statusLed, 0.5, 50)
@@ -67,6 +70,7 @@ def main():
                 player.connectMPD()
                 print "new music added"
                 hwd.flashLed(hwd.statusLed, 1, 50)
+                print "waiting for usb drive unmount..."
                 while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.1)
                 print "usb drive removed"
