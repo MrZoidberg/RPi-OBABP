@@ -67,7 +67,7 @@ def main():
                                     "/var/lib/mpd/tag_cache")
                 player.connectMPD()
                 print "new music added"
-                hwd.flashLed(hwd.statusLed, 1, 50)
+                hwd.flashLed(hwd.statusLed, 0.25, 50)
                 while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.1)
                 print "usb drive removed"
