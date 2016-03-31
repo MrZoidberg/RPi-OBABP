@@ -55,11 +55,9 @@ def main():
 
         hwd.updateLed(hwd.powerLed, True)
 
+        noSongsLed = False
         while(True):
             pendrive = checkForUSBDevice(driveName)
-
-            print player.getStats()
-            print player.getStats()["songs"]
 
             if pendrive != "":
                 print "new music detected"
@@ -77,6 +75,16 @@ def main():
                 print "usb drive removed"
                 hwd.stopFlash(hwd.statusLed)
 
+            if player.getStats()["songs"] == 0 and noSongsLed is False:
+                hwd.flashLed(hwd.statusLed, 0.5, 50)
+                noSongsLed = True
+            elif noSongsLed is True:
+                hwd.stopFlash(hwd.statusLed)
+                noSongsLed = False
+
+            if player.getStats()["songs"] > 0:
+                hwd.updateLed(hwd.statusLed, player.getState() == "play")
+                
             time.sleep(0.1)
 
         raw_input("Press Enter to exit...")
