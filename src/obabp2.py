@@ -58,7 +58,8 @@ def main():
         while(True):
             pendrive = checkForUSBDevice(driveName)
 
-            print player.getPlaylistinfo()
+            print player.getStats()
+            print player.getStats()["songs"]
 
             if pendrive != "":
                 print "new music detected"

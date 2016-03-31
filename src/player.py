@@ -42,9 +42,9 @@ class Player(object):
             print "mpd connection error"
             print traceback.print_exc()
 
-    def getPlaylistinfo(self):
+    def getStats(self):
         try:
-            return self.client.playlistinfo()
+            return self.client.stats()
         except SocketError:
             print "mpd connection error"
             print traceback.print_exc()
