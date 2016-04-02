@@ -89,24 +89,23 @@ def main():
                     hwd.stopFlash(hwd.statusLed)
                     noSongsLed = False
 
-                if hwd.isButtonPressed(hwd.playButton):
+                if hwd.getInput(hwd.playButton):
                     playPressed += 1
                 else:
-                    if hwd.isButtonRaised(hwd.playButton):
-                        if (playPressed >= 50):
-                            player.prevSong()
-                        elif (playPressed >= 30):
-                            player.nextSong()
-                        else:
-                            player.playPause()
-                        playPressed = 0
+                    if (playPressed >= 50):
+                        player.prevSong()
+                    elif (playPressed >= 30):
+                        player.nextSong()
+                    else:
+                        player.playPause()
+                    playPressed = 0
 
                 hwd.updateLed(hwd.statusLed, player.getState() == "play")
 
-                if hwd.isButtonRaised(hwd.volumeUpButton):
+                if hwd.isButtonPressed(hwd.volumeUpButton):
                     player.increaseVolume(2)
 
-                if hwd.isButtonRaised(hwd.volumeDownButton):
+                if hwd.isButtonPressed(hwd.volumeDownButton):
                     player.decreaseVolume(2)
 
             time.sleep(0.1)
