@@ -90,7 +90,12 @@ def main():
                     noSongsLed = False
 
                 if hwd.getInput(hwd.playButton):
+                    print "pressed"
                     playPressed += 1
+                    if playPressed == 30:
+                        hwd.flashLed(hwd.statusLed, 1, 80)
+                    elif playPressed == 50:
+                        hwd.flashLed(hwd.statusLed, 0.5, 80)
                 else:
                     if playPressed >= 50:
                         player.prevSong()
