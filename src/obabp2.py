@@ -75,9 +75,10 @@ def main():
                 print "usb drive removed"
                 hwd.stopFlash(hwd.statusLed)
 
-            if player.getStats()["songs"] == 0 and noSongsLed is False:
-                hwd.flashLed(hwd.statusLed, 0.5, 50)
-                noSongsLed = True
+            if player.getStats()["songs"] == 0:
+                if noSongsLed is False:
+                    hwd.flashLed(hwd.statusLed, 0.5, 50)
+                    noSongsLed = True
             elif noSongsLed is True:
                 hwd.stopFlash(hwd.statusLed)
                 noSongsLed = False
