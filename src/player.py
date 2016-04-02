@@ -59,13 +59,13 @@ class Player(object):
             self.client.pause()
 
     def increaseVolume(self):
-        volume = self.client.status()["volume"]
+        volume = int(self.client.status()["volume"])
         volume += 1
         print "settings volume to " + str(volume)
-        self.client.setvol(volume)
+        self.client.setvol(str(volume))
 
     def decreaseVolume(self):
-        volume = self.client.status()["volume"]
+        volume = int(self.client.status()["volume"])
         volume -= 1
         print "settings volume to " + str(volume)
-        self.client.setvol(volume)
+        self.client.setvol(str(volume))
