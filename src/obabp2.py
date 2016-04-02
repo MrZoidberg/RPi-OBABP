@@ -92,11 +92,11 @@ def main():
                 if hwd.getInput(hwd.playButton):
                     playPressed += 1
                 else:
-                    if (playPressed >= 50):
+                    if playPressed >= 50:
                         player.prevSong()
-                    elif (playPressed >= 30):
+                    elif playPressed >= 30:
                         player.nextSong()
-                    else:
+                    elif playPressed > 0:
                         player.playPause()
                     playPressed = 0
 
