@@ -50,7 +50,8 @@ class Player(object):
             print traceback.print_exc()
 
     def playPause(self):
-        if self.client.status()["state"] == "stop":
+        state = self.client.status()["state"]
+        if state == "stop" or state == "pause":
             print "play"
             self.client.play()
         else:
@@ -60,11 +61,11 @@ class Player(object):
     def increaseVolume(self):
         volume = self.client.status()["volume"]
         volume += 1
-        print "settings volume to " + volume
+        print "settings volume to " + str(volume)
         self.client.setvol(volume)
 
     def decreaseVolume(self):
         volume = self.client.status()["volume"]
         volume -= 1
-        print "settings volume to " + volume
+        print "settings volume to " + str(volume)
         self.client.setvol(volume)
