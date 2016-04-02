@@ -76,7 +76,6 @@ def main():
                 hwd.stopFlash(hwd.statusLed)
 
             songsCount = player.getStats()["songs"]
-            print songsCount
 
             if songsCount == 0:
                 if noSongsLed is False:
@@ -85,6 +84,7 @@ def main():
                     noSongsLed = True
             else:
                 if noSongsLed is True:
+                    print "songs found"
                     hwd.stopFlash(hwd.statusLed)
                     noSongsLed = False
 
