@@ -58,14 +58,22 @@ class Player(object):
             print "pause"
             self.client.pause()
 
-    def increaseVolume(self):
+    def increaseVolume(self, delta):
         volume = int(self.client.status()["volume"])
-        volume += 1
+        volume += delta
         print "settings volume to " + str(volume)
         self.client.setvol(str(volume))
 
-    def decreaseVolume(self):
+    def decreaseVolume(self, delta):
         volume = int(self.client.status()["volume"])
-        volume -= 1
+        volume -= delta
         print "settings volume to " + str(volume)
         self.client.setvol(str(volume))
+
+    def nextSong(self):
+        print "next song"
+        self.client.next()
+
+    def prevSong(self):
+        print "prev song"
+        self.client.previous()

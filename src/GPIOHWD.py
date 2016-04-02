@@ -11,6 +11,7 @@ class GPIOHWD(object):
         self._playButton = -1
         self._volumeUpButton = -1
         self._volumeDownButton = -1
+        self._nextButton = -1
         self.flashes = dict()
 
     @property
@@ -33,6 +34,10 @@ class GPIOHWD(object):
     def volumeDownButton(self):
         return self._volumeDownButton
 
+    @property
+    def nextButton(self):
+        return self._nextButton
+
     def setStatusLed(self, _led):
         self._statusLed = _led
 
@@ -47,6 +52,9 @@ class GPIOHWD(object):
 
     def setVolumeUpButton(self, _button):
         self._volumeUpButton = _button
+
+    def setnextButton(self, _button):
+        self._nextButton = _button
 
     def flashLed(self, led, speed, time):
         print("flashing led " + str(led) + " at freq " + str(speed) +
@@ -70,7 +78,10 @@ class GPIOHWD(object):
             GPIO.output(led, GPIO.HIGH)
 
     def isButtonPressed(self, led):
-        return GPIO.event_detected(led)
+        return GPIO.event_detected(led, GPIO.FALLING)
+
+    def isButtonRaised(self, led):
+        return GPIO.event_detected(led, GPIO.RISING)
 
     def setup(self):
         leds = [self._powerLed, self._statusLed]
@@ -79,7 +90,7 @@ class GPIOHWD(object):
 
         GPIO.setup(leds, GPIO.OUT)
         GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self._playButton, GPIO.RISING, bouncetime=300)
+        GPIO.add_event_detect(self._playButton, GPIO.BOTH)
         GPIO.add_event_detect(self._volumeUpButton, GPIO.FALLING)
         GPIO.add_event_detect(self._volumeDownButton, GPIO.FALLING)
 

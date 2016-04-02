@@ -56,6 +56,7 @@ def main():
         hwd.updateLed(hwd.powerLed, True)
 
         noSongsLed = False
+        playPressed = 0
         while(True):
             pendrive = checkForUSBDevice(driveName)
 
@@ -88,16 +89,25 @@ def main():
                     hwd.stopFlash(hwd.statusLed)
                     noSongsLed = False
 
-                # update status led per player state
                 if hwd.isButtonPressed(hwd.playButton):
-                    player.playPause()
+                    playPressed += 1
+                else:
+                    if hwd.isButtonRaised(hwd.playButton):
+                        if (playPressed >= 50):
+                            player.prevSong()
+                        elif (playPressed >= 30):
+                            player.nextSong()
+                        else:
+                            player.playPause()
+                        playPressed = 0
+
                 hwd.updateLed(hwd.statusLed, player.getState() == "play")
 
-                if hwd.isButtonPressed(hwd.volumeUpButton):
-                    player.increaseVolume()
+                if hwd.isButtonRaised(hwd.volumeUpButton):
+                    player.increaseVolume(2)
 
-                if hwd.isButtonPressed(hwd.volumeDownButton):
-                    player.decreaseVolume()
+                if hwd.isButtonRaised(hwd.volumeDownButton):
+                    player.decreaseVolume(2)
 
             time.sleep(0.1)
 
