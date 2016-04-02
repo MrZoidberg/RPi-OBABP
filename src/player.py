@@ -48,3 +48,23 @@ class Player(object):
         except SocketError:
             print "mpd connection error"
             print traceback.print_exc()
+
+    def playPause(self):
+        if self.client.status()["state"] == "stop":
+            print "play"
+            self.client.play()
+        else:
+            print "pause"
+            self.client.pause()
+
+    def increaseVolume(self):
+        volume = self.client.status()["volume"]
+        volume += 1
+        print "settings volume to " + volume
+        self.client.setvol(volume)
+
+    def decreaseVolume(self):
+        volume = self.client.status()["volume"]
+        volume -= 1
+        print "settings volume to " + volume
+        self.client.setvol(volume)

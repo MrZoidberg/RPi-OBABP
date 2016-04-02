@@ -83,8 +83,17 @@ def main():
                 noSongsLed = False
 
             if player.getStats()["songs"] > 0:
+                # update status led per player state
+                if hwd.isButtonPressed(hwd.playButton):
+                    player.playPause()
                 hwd.updateLed(hwd.statusLed, player.getState() == "play")
-                
+
+                if hwd.isButtonPressed(hwd.volumeUpButton):
+                    player.increaseVolume()
+
+                if hwd.isButtonPressed(hwd.volumeDownButton):
+                    player.decreaseVolume()
+
             time.sleep(0.1)
 
         raw_input("Press Enter to exit...")

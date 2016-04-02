@@ -67,15 +67,23 @@ class GPIOHWD(object):
         if turnOn is True:
             GPIO.output(led, GPIO.LOW)
         else:
-            GPIO.output(led, GPIO.HIGH)
+            GPIO.output(led, GPIO.HIGH
+
+    def isButtonPressed(self, led):
+        return GPIO.event_detected(led)
 
     def setup(self):
-        leds = [self._powerLed, self._statusLed]
-        buttons = [self._playButton, self._volumeUpButton,
-                   self._volumeDownButton]
+        leds=[self._powerLed, self._statusLed]
+        buttons=[self._playButton, self._volumeUpButton,
+                 self._volumeDownButton]
 
         GPIO.setup(leds, GPIO.OUT)
         GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.add_event_detect(self._playButton, GPIO.RISING, bouncetime=300)
+        GPIO.add_event_detect(self._volumeUpButton, GPIO.FALLING,
+                              bouncetime=200)
+        GPIO.add_event_detect(self._volumeDownButton, GPIO.FALLING,
+                              bouncetime=200)
 
         GPIO.output(self._powerLed, GPIO.HIGH)
         GPIO.output(self._statusLed, GPIO.LOW)
