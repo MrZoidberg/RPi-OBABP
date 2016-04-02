@@ -91,16 +91,16 @@ def main():
 
                 if hwd.getInput(hwd.playButton):
                     playPressed += 1
-                    if playPressed == 20:
-                        hwd.flashLed(hwd.statusLed, 3, 50)
-                    elif playPressed == 40:
-                        hwd.flashLed(hwd.statusLed, 5, 50)
+                    # if playPressed == 20:
+                    #     hwd.flashLed(hwd.statusLed, 3, 50)
+                    # elif playPressed == 40:
+                    #     hwd.flashLed(hwd.statusLed, 5, 50)
                 else:
                     if playPressed >= 40:
-                        hwd.stopFlash(hwd.statusLed)
+                        # hwd.stopFlash(hwd.statusLed)
                         player.prevSong()
                     elif playPressed >= 20:
-                        hwd.stopFlash(hwd.statusLed)
+                        # hwd.stopFlash(hwd.statusLed)
                         player.nextSong()
                     elif playPressed > 0:
                         player.playPause()
