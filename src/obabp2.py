@@ -85,6 +85,7 @@ def main():
                     noSongsLed = True
             else:
                 if noSongsLed is True:
+                    print "songs found"
                     hwd.stopFlash(hwd.statusLed)
                     noSongsLed = False
 
