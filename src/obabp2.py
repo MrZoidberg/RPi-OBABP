@@ -89,7 +89,7 @@ def main():
                     hwd.stopFlash(hwd.statusLed)
                     noSongsLed = False
 
-                if hwd.getInput(hwd.playButton):
+                if hwd.getInput(hwd.playButton) is False:
                     playPressed += 1
                 else:
                     if (playPressed >= 50):
