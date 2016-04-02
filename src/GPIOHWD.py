@@ -81,7 +81,7 @@ class GPIOHWD(object):
         return GPIO.event_detected(led)
 
     def getInput(self, led):
-        return GPIO.input(led)
+        return GPIO.input(led) == GPIO.HIGH
 
     def setup(self):
         leds = [self._powerLed, self._statusLed]
