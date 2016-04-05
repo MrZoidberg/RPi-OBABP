@@ -92,11 +92,11 @@ def main():
 
                 if hwd.getInput(hwd.playButton):
                     playPressed += 1
-                    if playPressed == 30:
+                    if playPressed == 15 and player.getState() == "play":
                         # hwd.stopFlash(hwd.statusLed)
                         player.seekCur(-60*3)
                 else:
-                    if playPressed > 0:
+                    if playPressed > 0 and playPressed < 15:
                         player.playPause()
                     playPressed = 0
 
