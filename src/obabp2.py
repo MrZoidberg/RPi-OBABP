@@ -4,7 +4,6 @@ import time
 from GPIOHWD import GPIOHWD
 from player import Player
 import pyudev
-from threading import current_thread
 
 
 def checkForUSBDevice(driveName):
@@ -29,7 +28,7 @@ def loadMusic(device, mountPoint, musicDir, tagCacheDir):
     os.system("rm "+tagCacheDir)
     os.system("/etc/init.d/mpd start")
     os.system("mpc clear")
-    os.system("mpc ls | mpc add")
+    os.system("mpc listall | mpc add")
     os.system("/etc/init.d/mpd restart")
 
 
