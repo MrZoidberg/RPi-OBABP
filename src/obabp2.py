@@ -39,8 +39,7 @@ def main():
     print ("====> Audio player start")
 
     try:
-        parent_thread = current_thread()
-
+        # parent = current_thread()
         hwd = GPIOHWD()
         hwd.setStatusLed(18)
         hwd.setPowerLed(16)
@@ -76,9 +75,7 @@ def main():
                 hwd.flashLed(hwd.statusLed, 1, 50)
                 print "waiting for usb drive unmount..."
                 while checkForUSBDevice(driveName) == pendrive:
-                    parent_thread.join(0.1)
-                    if not parent_thread.is_alive():
-                        break
+                    time.sleep(0.5)
                 print "usb drive removed"
                 hwd.stopFlash(hwd.statusLed)
 
