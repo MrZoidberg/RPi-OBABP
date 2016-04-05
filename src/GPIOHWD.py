@@ -86,7 +86,7 @@ class GPIOHWD(object):
     def setup(self):
         leds = [self._powerLed, self._statusLed]
         buttons = [self._playButton, self._volumeUpButton,
-                   self._volumeDownButton]
+                   self._volumeDownButton, self._nextButton]
 
         GPIO.setup(leds, GPIO.OUT)
         GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
