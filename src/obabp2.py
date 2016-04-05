@@ -77,7 +77,7 @@ def main():
                 while checkForUSBDevice(driveName) == pendrive:
                     time.sleep(0.5)
                 print "usb drive removed"
-                # hwd.stopFlash(hwd.statusLed)
+                hwd.stopFlash(hwd.statusLed)
 
             songsCount = player.getStats()["songs"]
 
