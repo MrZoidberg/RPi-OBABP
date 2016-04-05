@@ -4,6 +4,28 @@ import time
 from GPIOHWD import GPIOHWD
 from player import Player
 import pyudev
+import sys
+
+
+def trace_exceptions(frame, event, arg):
+    if event != 'exception':
+        return
+    co = frame.f_code
+    func_name = co.co_name
+    line_no = frame.f_lineno
+    filename = co.co_filename
+    exc_type, exc_value, exc_traceback = arg
+    print 'Tracing exception: %s "%s" on line %s of %s' % \
+        (exc_type.__name__, exc_value, line_no, func_name)
+
+
+def trace_calls(frame, event, arg):
+    if event != 'call':
+        return
+    co = frame.f_code
+    func_name = co.co_name
+    if func_name in TRACE_INTO:
+        return trace_exceptions
 
 
 def checkForUSBDevice(driveName):
@@ -33,6 +55,7 @@ def loadMusic(device, mountPoint, musicDir, tagCacheDir):
 
 
 def main():
+    sys.settrace(trace_calls)
     hwd = None
     driveName = 'AUDIO'
     print ("====> Audio player start")
