@@ -5,7 +5,6 @@ class GPIOHWD(object):
 
     def __init__(self,):
         print("GPIO version: " + GPIO.VERSION)
-        GPIO.setmode(GPIO.BOARD)
         self._statusLed = -1
         self._powerLed = -1
         self._playButton = -1
@@ -84,6 +83,7 @@ class GPIOHWD(object):
         return GPIO.input(led)
 
     def setup(self):
+        GPIO.setmode(GPIO.BOARD)
         leds = [self._powerLed, self._statusLed]
         buttons = [self._playButton, self._volumeUpButton,
                    self._volumeDownButton, self._nextButton]
