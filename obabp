@@ -3,14 +3,15 @@
 DAEMON=/usr/bin/python
 ARGS="/RPi-OBABP/src/obabp2.py"
 PIDFILE=/var/run/obabp2.pid
+DAEMON_USER=root
 
 case "$1" in
   start)
     echo "Starting server"
-    /sbin/start-stop-daemon --start --pidfile $PIDFILE \
-        --user www-data --group www-data \
+    /sbin/start-stop-daemon --start --background --pidfile $PIDFILE \
+        --user $DAEMON_USER \
         -b --make-pidfile \
-        --chuid www-data \
+        --chuid $DAEMON_USER \
         --exec $DAEMON $ARGS
     ;;
   stop)
