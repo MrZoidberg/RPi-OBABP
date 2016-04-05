@@ -57,18 +57,18 @@ class GPIOHWD(object):
         self._nextButton = _button
 
     def flashLed(self, led, speed, time):
+        self.stopFlash(led)
         print("flashing led " + str(led) + " at freq " + str(speed) +
               " with duty " + str(time))
-        self.stopFlash(led)
         pwm = GPIO.PWM(led, speed)
         pwm.start(time)
         self.flashes[led] = pwm
 
     def stopFlash(self, led):
-        print("stop flashing led " + str(led))
         if led in self.flashes:
             pwm = self.flashes.pop(led, None)
             pwm.stop()
+        print("stop flashing led " + str(led))
 
     def updateLed(self, led, turnOn):
         # self.stopFlash(led)
