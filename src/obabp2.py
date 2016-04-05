@@ -28,7 +28,7 @@ def loadMusic(device, mountPoint, musicDir, tagCacheDir):
     os.system("rm "+tagCacheDir)
     os.system("/etc/init.d/mpd start")
     os.system("mpc clear")
-    os.system("mpc listall | mpc add")
+    os.system("mpc ls | mpc add")
     os.system("/etc/init.d/mpd restart")
 
 
@@ -41,6 +41,7 @@ def main():
         hwd = GPIOHWD()
         hwd.setStatusLed(18)
         hwd.setPowerLed(16)
+        hwd.setnextButton(7)
         hwd.setPlayButton(11)
         hwd.setVolumeUpButton(13)
         hwd.setVolumeDownButton(15)
@@ -91,18 +92,11 @@ def main():
 
                 if hwd.getInput(hwd.playButton):
                     playPressed += 1
-                    # if playPressed == 20:
-                    #     hwd.flashLed(hwd.statusLed, 3, 50)
-                    # elif playPressed == 40:
-                    #     hwd.flashLed(hwd.statusLed, 5, 50)
+                    if playPressed == 30:
+                        # hwd.stopFlash(hwd.statusLed)
+                        player.seekCur(-60*3)
                 else:
-                    if playPressed >= 40:
-                        # hwd.stopFlash(hwd.statusLed)
-                        player.prevSong()
-                    elif playPressed >= 20:
-                        # hwd.stopFlash(hwd.statusLed)
-                        player.nextSong()
-                    elif playPressed > 0:
+                    if playPressed > 0:
                         player.playPause()
                     playPressed = 0
 
@@ -113,6 +107,9 @@ def main():
 
                 if hwd.isButtonPressed(hwd.volumeDownButton):
                     player.decreaseVolume(2)
+
+                if hwd.isButtonPressed(hwd.nextButton):
+                    player.nextSong()
 
             time.sleep(0.1)
 

@@ -90,7 +90,7 @@ class GPIOHWD(object):
 
         GPIO.setup(leds, GPIO.OUT)
         GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        # GPIO.add_event_detect(self._playButton, GPIO.BOTH)
+        GPIO.add_event_detect(self._nextButton, GPIO.RISING, bouncetime=200)
         GPIO.add_event_detect(self._volumeUpButton, GPIO.FALLING)
         GPIO.add_event_detect(self._volumeDownButton, GPIO.FALLING)
 

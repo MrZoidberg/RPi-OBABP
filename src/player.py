@@ -77,3 +77,7 @@ class Player(object):
     def prevSong(self):
         print "prev song"
         self.client.previous()
+
+    def seekCur(self, time):
+        print "seek"
+        self.client.seekcur(time)
